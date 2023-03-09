@@ -12,7 +12,7 @@ public class Transpose {
     readDimension();
     System.out.println("Введите числа матрицы через пробел");
     int[][] matrix = readMatrix(dimension);
-    System.out.println("Полученная матрица");
+    System.out.println("Исходная матрица");
     print(matrix);
     transpose(matrix);
     System.out.println("Транспонированная матрица");
@@ -20,21 +20,25 @@ public class Transpose {
 
   }
 
-
   private static void readDimension() {
     if (scan.hasNextInt()) {
       dimension = scan.nextInt();
     } else {
       System.out.println("Вы ввели не число, или оно слишком большое");
+      System.exit(0);
     }
   }
-
   private static int[][] readMatrix(int dimension) {
     int[][] matrix = new int[dimension][dimension];
     for (int i=0; i<dimension; i++) {
       System.out.printf("Введите %s-ю строку матрицы%n", i+1);
       for (int j=0; j<dimension; j++) {
-        matrix[i][j] = Integer.parseInt(scan.next());
+        if (scan.hasNextInt()) {
+          matrix[i][j] = scan.nextInt();
+        } else {
+          System.out.println("Вы ввели не число, или оно слишком большое");
+          System.exit(0);
+        }
       }
     }
     return matrix;
